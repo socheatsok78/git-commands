@@ -1,9 +1,8 @@
 #!/usr/bin/env sh
 
 set -e
-set -u
 
-command=$1
+command="$1"
 shift
 
 help() {
