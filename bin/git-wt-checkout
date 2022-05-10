@@ -1,21 +1,24 @@
 #!/usr/bin/env sh
 
+set -e
+set -u
+
 run_hook() {
 	if [ "$(command -v git-runhook)" ]; then
 		git runhook "$@"
 	fi
 }
 
-run_buildpack() {
-	if [ "$(command -v git-buildpack)" ]; then
-		git buildpack "$@"
+run_builddep() {
+	if [ "$(command -v git-builddep)" ]; then
+		git builddep "$@"
 	fi
 }
 
 if [ ! -z "$@" ]
 then
-	git worktree add "$@"
-	run_buildpack "$1"
+	git worktree add "$@" --guess-remote
+	run_builddep "$1"
 	run_hook "$1" "post-checkout"
 else
 	echo "Please specify a branch to checkout!"

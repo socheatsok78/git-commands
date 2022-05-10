@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+set -e
+set -u
+
 RUNHOOK_TARGET=$1
 shift
 
