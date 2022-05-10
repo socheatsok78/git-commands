@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+RUNHOOK_TARGET=$1
+shift
+
+HOOK=$1
+shift
+
+if [[ -n "${RUNHOOK_TARGET}" ]]; then
+	cd "${RUNHOOK_TARGET}"
+fi
+
+exec "../worktrees/$RUNHOOK_TARGET/hooks/$HOOK"

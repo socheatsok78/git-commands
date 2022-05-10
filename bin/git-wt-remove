@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+if [ ! -z "$@" ]
+then
+	git worktree remove "$@" --force
+else
+	echo "Please specify a branch to remove!"
+	exit 1
+fi

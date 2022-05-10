@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+command=$1
+shift
+
+help() {
+	cat <<'EOF'
+usage: git wt checkout <path>
+   or: git wt remove [<options>]
+   or: git wt list [<options>]
+   or: git wt prune [<options>]
+   or: git wt help
+EOF
+
+exit 0
+}
+
+test "$command" = "" && help
+test "$command" = "help" && help
+
+if [ "$(command -v "git-wt-$command")" ]; then
+	git-wt-$command "$@"
+else
+	echo "git: '$command' is not a git wt command. See 'git wt --help'."
+	exit 1
+fi

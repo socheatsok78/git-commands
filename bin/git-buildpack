@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+BUILDPACK_TARGET=$1
+shift
+
+if [[ -n "${BUILDPACK_TARGET}" ]]; then
+	cd "${BUILDPACK_TARGET}"
+fi
+
+# Node.js project buildpack
+buildpack_node() {
+	local NPM_BIN=${NPM_BIN:-npm}
+
+	if [ -f "yarn.lock" ]; then
+		NPM_BIN=yarn
+	fi
+
+	if [ -f "package.json" ]; then
+		$NPM_BIN install
+	fi
+}
+
+# main
+buildpack_node
